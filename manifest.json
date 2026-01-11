@@ -1,0 +1,20 @@
+{
+  "name": "Global Translator • Crystal Edition",
+  "short_name": "GlobalTrans",
+  "id": "/",
+  "scope": "/",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#FFFAF0",
+  "theme_color": "#FFFAF0",
+  "description": "Premium world traveler translator app.",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/2932/2932822.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

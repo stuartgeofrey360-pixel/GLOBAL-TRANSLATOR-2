@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Global Translator • Crystal Edition</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#FFFAF0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/2932/2932822.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src='https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js'></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --safe-top: env(safe-area-inset-top);
+            --safe-bottom: env(safe-area-inset-bottom);
+            --primary-blue: #0284C7;
+            --primary-green: #059669;
+            --bg-top: #FFFAF0; /* Floral White / Cream */
+            --bg-bottom: #FFF8E7; /* Cosmic Latte / Warm Cream */
+            --text-main: #0F172A;
+            --gold: #D4AF37;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            min-height: 100vh;
+            color: var(--text-main);
+            -webkit-font-smoothing: antialiased;
+            position: relative;
+            background: linear-gradient(180deg, var(--bg-top) 0%, #FFFFFF 50%, var(--bg-bottom) 100%);
+            background-attachment: scroll;
+        }
+
+        /* Pattern overlay attached to body */
+        body::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Warm brownish dot pattern for cream theme */
+            background-image: radial-gradient(circle at 2px 2px, rgba(139, 69, 19, 0.03) 1px, transparent 0);
+            background-size: 32px 32px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .app-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding-top: var(--safe-top);
+            padding-bottom: var(--safe-bottom);
+        }
+
+        .content-area {
+            flex: 1;
+            width: 100%;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 28px;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.05); /* Warm gold shadow */
+        }
+
+        .crystal-card {
+            background: #FFFFFF;
+            border: 1px solid rgba(212, 175, 55, 0.1); /* Subtle gold border */
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.05);
+            border-radius: 28px;
+        }
+
+        @keyframes signature-glow {
+            0%, 100% { filter: drop-shadow(0 0 2px rgba(212, 175, 55, 0.2)); transform: scale(1); }
+            50% { filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.5)); transform: scale(1.05); }
+        }
+        
+        .shining-s {
+            font-family: 'Times New Roman', serif;
+            font-weight: 900;
+            background: linear-gradient(135deg, #D4AF37 0%, #F1D279 50%, #B8860B 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: signature-glow 4s infinite ease-in-out;
+        }
+
+        .btn-squishy {
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .btn-squishy:active {
+            transform: scale(0.94);
+        }
+
+        .animate-reveal {
+            animation: reveal-up 0.5s cubic-bezier(0.2, 1, 0.3, 1) forwards;
+        }
+        @keyframes reveal-up {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 3px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(212, 175, 55, 0.15);
+            border-radius: 10px;
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
+  }
+}
+</script>
+</head>
+<body>
+    <div id="root"></div>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./service-worker.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>

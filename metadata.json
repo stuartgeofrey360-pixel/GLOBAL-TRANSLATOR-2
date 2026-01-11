@@ -1,0 +1,9 @@
+{
+  "name": "Copy of Global Translator",
+  "description": "A refined, blue and white light-themed travel companion featuring real-time voice, text, and visual translation with a shining golden signature.",
+  "requestFramePermissions": [
+    "microphone",
+    "camera",
+    "geolocation"
+  ]
+}
